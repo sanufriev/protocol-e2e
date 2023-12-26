@@ -155,19 +155,19 @@
         <!-- ============ Protocol Clients ============ -->
         <dependency>
             <groupId>com.rarible.protocol.union</groupId>
-            <artifactId>protocol-union-client-starter</artifactId>
+            <artifactId>protocol-union-client</artifactId>
         </dependency>
         <dependency>
             <groupId>com.rarible.protocol.ethereum</groupId>
-            <artifactId>protocol-client-nft-starter</artifactId>
+            <artifactId>protocol-client-nft</artifactId>
         </dependency>
         <dependency>
             <groupId>com.rarible.protocol.ethereum</groupId>
-            <artifactId>protocol-client-order-starter</artifactId>
+            <artifactId>protocol-client-order</artifactId>
         </dependency>
         <dependency>
             <groupId>com.rarible.protocol.ethereum</groupId>
-            <artifactId>protocol-client-erc20-starter</artifactId>
+            <artifactId>protocol-client-erc20</artifactId>
         </dependency>
 
         <!-- ============ Eth contracts ============ -->
@@ -218,6 +218,10 @@
         </dependency>
 
         <!-- ================== Test ===================== -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.rarible.core</groupId>
             <artifactId>rarible-core-test-common</artifactId>
