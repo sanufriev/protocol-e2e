@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>rarible-protocol-e2e</artifactId>
+    <groupId>com.rarible.protocol</groupId>
+    <packaging>jar</packaging>
+    <version>${revision}</version>
+
+    <parent>
+        <groupId>com.rarible</groupId>
+        <artifactId>rarible-parent-pom</artifactId>
+        <version>2.7.7</version>
+    </parent>
+
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>nexus</name>
+            <url>http://nexus.rarible.int/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>nexus-releases</name>
+            <url>http://nexus.rarible.int/repository/maven-releases/</url>
+        </repository>
+        <repository>
+            <id>nexus-snapshots</id>
+            <name>nexus-snapshots</name>
+            <url>http://nexus.rarible.int/repository/maven-snapshots/</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus-ext-maven-public</id>
+            <name>nexus-ext-maven-public</name>
+            <url>http://nexus-ext.rarible.int/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <!-- =========== Base =========== -->
+        <revision>1.0.0</revision>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.deploy.skip>true</maven.deploy.skip>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- =========== Protocol OpenApi =========== -->
+        <rarible.protocol.currency.version>1.69.0</rarible.protocol.currency.version>
+        <rarible.protocol.ethereum.version>1.74.1</rarible.protocol.ethereum.version>
+        <rarible.protocol.union.version>1.74.100</rarible.protocol.union.version>
+
+        <!-- =========== Other =========== -->
+        <rarible.ethereum.contracts.version>1.0.57</rarible.ethereum.contracts.version>
+        <dev-jna.version>5.7.0</dev-jna.version>
+    </properties>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus-ext-maven-public</id>
+            <name>nexus-ext-maven-public</name>
+            <url>https://repo.rarible.org/repository/maven-public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>1.9.0</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <mainClass>MainKt</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- =========== Union Protocol-API =========== -->
+            <dependency>
+                <groupId>com.rarible.protocol.union</groupId>
+                <artifactId>rarible-union-openapi</artifactId>
+                <version>${rarible.protocol.union.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- ========== Currency Protocol-API ========= -->
+            <dependency>
+                <groupId>com.rarible.protocol.currency</groupId>
+                <artifactId>rarible-currency-openapi</artifactId>
+                <version>${rarible.protocol.currency.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- ============ Eth Protocol-API ============ -->
+            <dependency>
+                <groupId>com.rarible.protocol.ethereum</groupId>
+                <artifactId>rarible-ethereum-openapi</artifactId>
+                <version>${rarible.protocol.ethereum.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- ============ Eth contracts ============ -->
+        <dependency>
+            <groupId>com.rarible.protocol.contracts</groupId>
+            <artifactId>protocol-ethereum-contracts-nft</artifactId>
+            <version>${rarible.ethereum.contracts.version}</version>
+        </dependency>
+
+        <!-- ============ Spring ============ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- ============ Other ============ -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-jdk8</artifactId>
+        </dependency>
+
+        <!-- ================== Test ===================== -->
+        <dependency>
+            <groupId>com.rarible.core</groupId>
+            <artifactId>rarible-core-test-common</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.mockk</groupId>
+            <artifactId>mockk</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <classifier>osx-x86_64</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
+            <classifier>osx-aarch_64</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.daonomic.scalether</groupId>
+            <artifactId>domain-test_${scala.major.version}</artifactId>
+            <version>${scalether.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
