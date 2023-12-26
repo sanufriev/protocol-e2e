@@ -2,6 +2,7 @@ package com.rarible.protocol.e2e.configuration
 
 import com.rarible.protocol.e2e.service.provide.WebClientCustomizerFactory
 import com.rarible.protocol.union.api.client.FixedUnionApiServiceUriProvider
+import com.rarible.protocol.union.api.client.ItemControllerApi
 import com.rarible.protocol.union.api.client.UnionApiClientFactory
 import com.rarible.protocol.union.api.client.UnionApiServiceUriProvider
 import org.springframework.boot.context.properties.EnableConfigurationProperties
@@ -26,6 +27,13 @@ class ProtocolUnionApiClientsConfiguration(
         unionApiServiceUriProvider: UnionApiServiceUriProvider
     ): UnionApiClientFactory {
         return UnionApiClientFactory(unionApiServiceUriProvider, customizer)
+    }
+
+    @Bean
+    fun unionItemControllerApi(
+        unionApiClientFactory: UnionApiClientFactory
+    ): ItemControllerApi {
+        return unionApiClientFactory.createItemApiClient()
     }
 }
 
