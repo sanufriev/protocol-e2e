@@ -59,6 +59,7 @@
         <rarible.protocol.union.version>1.74.100</rarible.protocol.union.version>
 
         <!-- =========== Other =========== -->
+        <rarible.core.version>2.6.12</rarible.core.version>
         <rarible.ethereum.contracts.version>1.0.57</rarible.ethereum.contracts.version>
         <dev-jna.version>5.7.0</dev-jna.version>
     </properties>
@@ -117,6 +118,14 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -148,6 +157,15 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- ============ Service core ============ -->
+            <dependency>
+                <groupId>com.rarible.core</groupId>
+                <artifactId>rarible-core-parent</artifactId>
+                <version>${rarible.core.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -175,6 +193,12 @@
             <groupId>com.rarible.protocol.contracts</groupId>
             <artifactId>protocol-ethereum-contracts-nft</artifactId>
             <version>${rarible.ethereum.contracts.version}</version>
+        </dependency>
+
+        <!-- ============ Service core ============ -->
+        <dependency>
+            <groupId>com.rarible.core</groupId>
+            <artifactId>rarible-core-meta-resource</artifactId>
         </dependency>
 
         <!-- ============ Spring ============ -->

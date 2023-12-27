@@ -15,7 +15,9 @@ data class E2eProperties(
     val environment: String,
     val blockchain: String,
     @NestedConfigurationProperty
-    val protocol: ProtocolClientProperties
+    val protocol: ProtocolClientProperties,
+    @NestedConfigurationProperty
+    val contentStorage: ContentStorageProperties,
 )
 
 data class ProtocolClientProperties(
@@ -27,3 +29,7 @@ data class ProtocolClientProperties(
         return ApiKey.protocolApiKey(apiKey)
     }
 }
+
+data class ContentStorageProperties(
+    val endpoint: URI,
+)

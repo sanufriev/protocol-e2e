@@ -57,4 +57,3 @@ class ProtocolIndexerApiClientsConfiguration(
         return Erc20IndexerApiClientFactory(erc20IndexerApiServiceUriProvider, customizer)
     }
 }
-

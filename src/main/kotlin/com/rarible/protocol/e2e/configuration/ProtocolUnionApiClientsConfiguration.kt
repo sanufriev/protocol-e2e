@@ -36,4 +36,3 @@ class ProtocolUnionApiClientsConfiguration(
         return unionApiClientFactory.createItemApiClient()
     }
 }
-
