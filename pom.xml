@@ -60,7 +60,7 @@
 
         <!-- =========== Other =========== -->
         <rarible.core.version>2.6.12</rarible.core.version>
-        <rarible.ethereum.contracts.version>1.0.57</rarible.ethereum.contracts.version>
+        <rarible.ethereum.version>1.7.29</rarible.ethereum.version>
         <dev-jna.version>5.7.0</dev-jna.version>
     </properties>
 
@@ -131,6 +131,15 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- ============ Ethereum core ============ -->
+            <dependency>
+                <groupId>com.rarible.ethereum</groupId>
+                <artifactId>rarible-ethereum-parent</artifactId>
+                <version>${rarible.ethereum.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- =========== Union Protocol-API =========== -->
             <dependency>
                 <groupId>com.rarible.protocol.union</groupId>
@@ -166,6 +175,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -186,13 +196,6 @@
         <dependency>
             <groupId>com.rarible.protocol.ethereum</groupId>
             <artifactId>protocol-client-erc20</artifactId>
-        </dependency>
-
-        <!-- ============ Eth contracts ============ -->
-        <dependency>
-            <groupId>com.rarible.protocol.contracts</groupId>
-            <artifactId>protocol-ethereum-contracts-nft</artifactId>
-            <version>${rarible.ethereum.contracts.version}</version>
         </dependency>
 
         <!-- ============ Service core ============ -->
@@ -228,6 +231,11 @@
         </dependency>
 
         <!-- ============ Other ============ -->
+        <dependency>
+            <groupId>com.rarible.ethereum</groupId>
+            <artifactId>rarible-ethereum-contracts-test</artifactId>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>io.daonomic.scalether</groupId>
             <artifactId>transport-mono_${scala.major.version}</artifactId>

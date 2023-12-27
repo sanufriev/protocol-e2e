@@ -3,6 +3,7 @@ package com.rarible.protocol.e2e.model
 import java.net.URL
 
 data class MintMeta(
+    val raw: String,
     val content: ContentMeta,
     val attributes: List<Attribute>
 )

@@ -3,8 +3,8 @@ package com.rarible.protocol.e2e.misc
 import io.daonomic.rpc.domain.Request
 import io.daonomic.rpc.domain.Response
 import io.netty.channel.ChannelException
-import org.springframework.web.reactive.function.client.WebClientException
 import io.daonomic.rpc.mono.WebClientTransport
+import org.springframework.web.reactive.function.client.WebClientException
 import reactor.core.publisher.Mono
 import reactor.util.retry.Retry
 import scala.reflect.Manifest
