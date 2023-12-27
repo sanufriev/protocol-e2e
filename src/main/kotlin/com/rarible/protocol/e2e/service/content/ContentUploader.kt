@@ -7,6 +7,7 @@ import com.rarible.protocol.e2e.model.UploadedContent
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.awaitBodilessEntity
+import java.net.URL
 import java.util.UUID
 
 @Component
@@ -17,9 +18,9 @@ class ContentUploader(e2eProperties: E2eProperties) {
 
     suspend fun uploadContent(content: Content): UploadedContent {
         val name = UUID.randomUUID().toString()
-        val url = properties.endpoint
+        val url = "${properties.endpoint}/$name"
         transport.put().uri(url).bodyValue(content.payload).retrieve().awaitBodilessEntity()
-        val upload = UploadedContent(name = name, url = url.toURL())
+        val upload = UploadedContent(name = name, url = URL(url))
         logger.info("Uploaded content: {}", upload)
         return upload
     }

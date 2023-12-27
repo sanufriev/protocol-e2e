@@ -30,6 +30,6 @@ class EvmMintService(
         val token = EthereumContractFactory.deployToken(sender, poller)
         val tokenId = Random.nextInt(1, 1000).toBigInteger()
         token.mint(sender.from(), tokenId).execute().awaitFirst()
-        return ItemIdDto(blockchain = blockchain, value = tokenId.toString())
+        return ItemIdDto(blockchain = blockchain, value = "${token.address().prefixed()}:$tokenId")
     }
 }

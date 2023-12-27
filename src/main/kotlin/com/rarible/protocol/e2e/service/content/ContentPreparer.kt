@@ -14,7 +14,7 @@ class ContentPreparer(
     private val contentDetector = ContentDetector()
 
     suspend fun preparerImageContent(): ContentMeta {
-        val image = ClassPathResource("image/sample1.png").inputStream.use { it.readAllBytes() }
+        val image = ClassPathResource("content/image/sample1.png").inputStream.use { it.readAllBytes() }
         val uploaded = contentUploader.uploadContent(Content(image))
         val meta = contentDetector.detect(ContentData(image), uploaded.name) ?: throw IllegalStateException("Can't detect image meta")
         return ContentMeta(

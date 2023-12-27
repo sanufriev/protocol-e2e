@@ -16,7 +16,7 @@ class BasicTest : AbstractTest() {
     @ParameterizedTest
     @EnumSource(SearchEngineDto::class)
     fun `fetch protocol items from union`(searchEngine: SearchEngineDto) = runBlocking<Unit> {
-        val blockchains = emptyList<BlockchainDto>()
+        val blockchains = properties.blockchains
         val continuation: String? = null
         val size = 10
         val showDeleted = false
