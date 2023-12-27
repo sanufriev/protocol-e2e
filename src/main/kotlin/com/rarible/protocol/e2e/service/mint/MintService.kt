@@ -14,11 +14,11 @@ class MintService(
         .flatMap { minter -> minter.supportedBlockchain.map { it to minter } }
         .toMap()
 
-    suspend fun mintItem(
-        blockchain: BlockchainDto,
-        content: ContentMeta
-    ): ItemIdDto {
-        val minter = minters[blockchain] ?: throw IllegalArgumentException("Unsupported blockchain: $blockchain")
-        return minter.mintItem(content)
+    suspend fun mintItem(blockchain: BlockchainDto, content: ContentMeta): ItemIdDto {
+        return getMinter(blockchain).mintItem(blockchain, content)
+    }
+
+    private fun getMinter(blockchain: BlockchainDto): BlockchainMintService {
+        return minters[blockchain] ?: throw IllegalArgumentException("Unsupported blockchain: $blockchain")
     }
 }

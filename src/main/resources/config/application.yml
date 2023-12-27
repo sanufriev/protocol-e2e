@@ -1,8 +1,9 @@
 e2e:
   environment: dev
-  blockchain: ethereum
   protocol:
     unionEndpoint: https://${e2e.environment}-api.rarible.org
     indexerEndpoint: https://${e2e.environment}-${e2e.blockchain}-dev.rarible.org
   contentStorage:
     endpoint: http://nexus.rarible.int/repository/e2e
+  blockchains:
+    - ethereum

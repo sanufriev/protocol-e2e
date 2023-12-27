@@ -229,6 +229,16 @@
 
         <!-- ============ Other ============ -->
         <dependency>
+            <groupId>io.daonomic.scalether</groupId>
+            <artifactId>transport-mono_${scala.major.version}</artifactId>
+            <version>${scalether.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.daonomic.scalether</groupId>
+            <artifactId>transaction-mono_${scala.major.version}</artifactId>
+            <version>${scalether.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
         </dependency>

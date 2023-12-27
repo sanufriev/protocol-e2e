@@ -7,5 +7,6 @@ import com.rarible.protocol.union.dto.ItemIdDto
 interface BlockchainMintService {
     val supportedBlockchain: List<BlockchainDto>
 
-    suspend fun mintItem(content: ContentMeta): ItemIdDto
+    suspend fun mintItem(blockchain: BlockchainDto, content: ContentMeta): ItemIdDto
 }
+
