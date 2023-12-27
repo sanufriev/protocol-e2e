@@ -33,7 +33,6 @@ data class AccountProperties(
 )
 
 data class EvmAccountProperties(
-    val address: Address,
     val privateKey: BigInteger
 )
 

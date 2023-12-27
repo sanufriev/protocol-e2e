@@ -1,4 +1,4 @@
 e2e:
   nodes:
     evm:
-      ethereum: https://dev-km1.rarible.int:6443
+      ethereum: https://dev-ethereum-node.rarible.com
